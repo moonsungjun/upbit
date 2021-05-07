@@ -2,8 +2,8 @@ import time
 import pyupbit
 import datetime
 
-access = "keyuMU9TUbpBfA43r4tRycbMI1NQVe9LxYmou9Donyh"
-secret = "keyvCwnZgz1GuXPcN0gcFGWDuGDCQfJDnEKbcP9yVn4"
+access = "fBGf7AfJAJ9cTXd39uVd5yHGdKxfjye4ZL8pdlQI"
+secret = "QEPgxHZgbxmnEGUz1hx7P7X8Q1bh4If6y15xYihx"
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -39,20 +39,20 @@ print("autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTT")
+        start_time = get_start_time("KRW-DOGE ")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-BTT", 0.1)
-            current_price = get_current_price("KRW-BTT")
+            target_price = get_target_price("KRW-DOGE ", 0.3)
+            current_price = get_current_price("KRW-DOGE ")
             if target_price < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-BTT", krw*0.9995)
+                    upbit.buy_market_order("KRW-DOGE ", krw*0.9995)
         else:
-            BTT = get_balance("BTT")
-            if BTT > 0.00008:
-                upbit.sell_market_order("KRW-BTT", BTT*0.9995)
+            DOGE  = get_balance("DOGE ")
+            if DOGE  > 0.027:
+                upbit.sell_market_order("KRW-DOGE ", DOGE *0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)
